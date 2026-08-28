@@ -29,9 +29,16 @@ struct MetricasBT {
 
 bool esFactible(const EstadoParcial& estado, const Politica& pol);
 
+// Versión optimizada con Poda
 void backtrackingPoda(EstadoParcial estado, 
                      const Politica& pol, 
                      const std::string& alfabeto, 
                      MetricasBT& metricas);
+
+// Versión exhaustiva Sin Poda 
+void backtrackingSinPoda(EstadoParcial estado, 
+                        const Politica& pol, 
+                        const std::string& alfabeto, 
+                        MetricasBT& metricas);
 
 #endif
