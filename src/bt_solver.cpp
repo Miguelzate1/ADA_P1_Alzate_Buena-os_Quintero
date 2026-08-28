@@ -28,7 +28,7 @@ void backtrackingPoda(EstadoParcial estado,
             estado.count_digit >= pol.minDigit &&
             estado.count_symbol >= pol.minSymbol) {
             
-            metricas.soluciones_encontradas++; // Solo contamos en lugar de guardar cadenas en RAM
+            metricas.soluciones_encontradas++;
         }
         return;
     }
@@ -48,5 +48,50 @@ void backtrackingPoda(EstadoParcial estado,
         if (esFactible(nuevo_estado, pol)) {
             backtrackingPoda(nuevo_estado, pol, alfabeto, metricas);
         }
+    }
+}
+
+// Validación al final en las hojas (Sin Poda)
+bool esValidaCompleta(const EstadoParcial& estado, const Politica& pol) {
+    if (estado.count_lower < pol.minLower ||
+        estado.count_upper < pol.minUpper ||
+        estado.count_digit < pol.minDigit ||
+        estado.count_symbol < pol.minSymbol) {
+        return false;
+    }
+    // Verificar regla de no consecutivos repetidos al final
+    for (size_t i = 1; i < estado.prefijo.length(); ++i) {
+        if (estado.prefijo[i] == estado.prefijo[i-1]) return false;
+    }
+    return true;
+}
+
+void backtrackingSinPoda(EstadoParcial estado, 
+                        const Politica& pol, 
+                        const std::string& alfabeto, 
+                        MetricasBT& metricas) {
+    
+    metricas.nodos_visitados++;
+
+    // Caso Base: Llegar a las hojas
+    if (estado.prefijo.length() == static_cast<size_t>(pol.n)) {
+        if (esValidaCompleta(estado, pol)) {
+            metricas.soluciones_encontradas++;
+        }
+        return;
+    }
+
+    // Explora TODAS las ramas sin descartar nada tempranamente
+    for (char c : alfabeto) {
+        EstadoParcial nuevo_estado = estado;
+        nuevo_estado.prefijo += c;
+        nuevo_estado.ultimo_caracter = c;
+
+        if (std::islower(static_cast<unsigned char>(c))) nuevo_estado.count_lower++;
+        else if (std::isupper(static_cast<unsigned char>(c))) nuevo_estado.count_upper++;
+        else if (std::isdigit(static_cast<unsigned char>(c))) nuevo_estado.count_digit++;
+        else nuevo_estado.count_symbol++;
+
+        backtrackingSinPoda(nuevo_estado, pol, alfabeto, metricas);
     }
 }
