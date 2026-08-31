@@ -1,1 +1,10 @@
 ada_p1
+# Compiled binaries
+*.exe
+*.out
+*.obj
+*.o
+
+# Local build artifacts
+app
+_tmp_test
