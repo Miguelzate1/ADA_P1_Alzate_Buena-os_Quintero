@@ -16,9 +16,9 @@ bool esFactible(const EstadoParcial& estado, const Politica& pol) {
 }
 
 void backtrackingPoda(EstadoParcial estado, 
-                     const Politica& pol, 
-                     const std::string& alfabeto, 
-                     MetricasBT& metricas) {
+                      const Politica& pol, 
+                      const std::string& alfabeto, 
+                      MetricasBT& metricas) {
     
     metricas.nodos_visitados++;
 
@@ -67,9 +67,9 @@ bool esValidaCompleta(const EstadoParcial& estado, const Politica& pol) {
 }
 
 void backtrackingSinPoda(EstadoParcial estado, 
-                        const Politica& pol, 
-                        const std::string& alfabeto, 
-                        MetricasBT& metricas) {
+                         const Politica& pol, 
+                         const std::string& alfabeto, 
+                         MetricasBT& metricas) {
     
     metricas.nodos_visitados++;
 
@@ -81,8 +81,11 @@ void backtrackingSinPoda(EstadoParcial estado,
         return;
     }
 
-    // Explora TODAS las ramas sin descartar nada tempranamente
+    // Explora las ramas sin descartar de forma anticipada por politicas de conteo
     for (char c : alfabeto) {
+        // Descarte estructural inmediato de repetidos consecutivos
+        if (c == estado.ultimo_caracter) continue;
+
         EstadoParcial nuevo_estado = estado;
         nuevo_estado.prefijo += c;
         nuevo_estado.ultimo_caracter = c;

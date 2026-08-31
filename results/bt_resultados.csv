@@ -1,0 +1,3 @@
+instancia,version,n,tiempo_ms,nodos_generados,soluciones_encontradas,reduccion_pct
+bt_demo_n4,sin_poda,4,340.178,19558574,811200,
+bt_demo_n4,con_poda,4,86.354,890720,811200,95.445885

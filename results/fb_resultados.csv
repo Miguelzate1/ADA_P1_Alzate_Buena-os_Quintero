@@ -1,0 +1,7 @@
+instancia,estrategia,alfabeto,n,tiempo_ms,candidatos_evaluados,encontrada,en_diccionario
+fb_equipo_1,fuerza_bruta,A1,4,311.969,475254,si,no
+fb_equipo_2,fuerza_bruta,A2,4,1151.92,1727604,si,no
+fb_equipo_3,fuerza_bruta,A1,5,8043.04,12356630,si,no
+fb_equipo_1,diccionario,-,4,0.5,500,no,no
+fb_equipo_2,diccionario,-,4,0.406,500,no,no
+fb_equipo_3,diccionario,-,5,0.39,500,no,no
