@@ -1,4 +1,3 @@
-ada_p1
 # Compiled binaries
 *.exe
 *.out
@@ -6,5 +5,9 @@ ada_p1
 *.o
 
 # Local build artifacts
+ada_p1
 app
 _tmp_test
+verificar_semilla
+main_test
+smoketest
